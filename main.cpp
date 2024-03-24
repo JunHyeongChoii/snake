@@ -46,31 +46,3 @@ void game()
     }
 }
 
-void drawWall()
-{
-    for (int i = 0; i < BOARD_SIZE +1 ; i++)
-    {
-        for(int j = 0; j < BOARD_SIZE +1 ; j++)
-        {
-            if(i == 0 && j == 0)
-                console::draw(i,j ,WALL_LEFT_TOP_STRING);
-
-            else if ( i == BOARD_SIZE && j == 0)
-                console::draw(i,j , WALL_RIGHT_TOP_STRING);
-
-            else if( i == 0 && j== BOARD_SIZE)
-                console::draw(i,j, WALL_LEFT_BOTTOM_STRING);
-
-            else if(i == BOARD_SIZE && j == BOARD_SIZE)
-                console::draw(i,j, WALL_RIGHT_BOTTOM_STRING);
-
-            else if( (i>0 && i<BOARD_SIZE) && (j == 0 || j==BOARD_SIZE ))
-                console::draw(i,j, WALL_HORIZONTAL_STRING);
-
-            else if( (i == 0 || i == BOARD_SIZE) && (j >0 && j<BOARD_SIZE))
-                console::draw(i,j, WALL_VERTICAL_STRING);   
-
-            
-        }
-    }
-}
