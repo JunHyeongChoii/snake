@@ -1,3 +1,5 @@
+#include "console.h"
+
 #define BOARD_SIZE 20
 #define MOVE_DELAY 60
 #define WALL_VERTICAL_STRING "┃"
