@@ -14,9 +14,9 @@
 
 void drawWall()
 {
-    for (int i = 0; i < BOARD_SIZE +1 ; i++)
+    for (int i = 0; i < BOARD_SIZE; i++)
     {
-        for(int j = 0; j < BOARD_SIZE +1 ; j++)
+        for(int j = 0; j < BOARD_SIZE; j++)
         {
             if(i == 0 && j == 0)
                 console::draw(i,j ,WALL_LEFT_TOP_STRING);
