@@ -12,6 +12,8 @@
 #define SNAKE_BODY_STRING "■"
 #define APPLE_STRING "●"
 
+
+
 void drawWall()
 {
     for (int i = 0; i < BOARD_SIZE; i++)
