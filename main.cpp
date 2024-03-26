@@ -147,25 +147,24 @@ void game()
         {
             console::draw(5, 10,"YOU LOSE!");
             console::draw(1, 11,"Try again? (Enter)");
-            while(true)
+            
+            if(console::key(console::K_ENTER))
             {
-                if(console::key(console::K_ENTER))
+
+                for(int i = 0; i<tail; i++)
                 {
-
-                    for(int i = 0; i<tail; i++)
-                    {
-                        tailX[i] = 0;
-                        tailY[i] = 0;
-                    }
-
-                    tail = 1;
-                    x = (BOARD_SIZE-1)/2;
-                    y = (BOARD_SIZE-1)/2;
-                    scoreX = 7;
-                    control = 0;
-                    score =0;
-                    randApplePosition(appleX, appleY, tail, tailX, tailY,BOARD_SIZE);
+                    tailX[i] = 0;
+                    tailY[i] = 0;
                 }
+
+                tail = 1;
+                x = (BOARD_SIZE-1)/2;
+                y = (BOARD_SIZE-1)/2;
+                scoreX = 7;
+                control = 0;
+                score =0;
+                randApplePosition(appleX, appleY, tail, tailX, tailY,BOARD_SIZE);
+ 
             }
             
         }
