@@ -23,7 +23,7 @@ int y = (BOARD_SIZE-1)/2;
 
 void game();
 void drawWall();
-int handleInput();
+void handleInput(int& control, int& x, int &y);
 
 
 int main()
@@ -32,12 +32,13 @@ int main()
     game();
 }
 
+int control = 0;
 
 
 void game()
 {
     int a =1;
-    int control = 0;
+    
     console::init();
     double targetFrameDuration = 1.0/MOVE_DELAY;
     int score = 0;
@@ -53,30 +54,31 @@ void game()
         drawWall();
         // console::draw(3,3,"Hello");
        
-        if(console::key(console::K_LEFT) && control != 2)
-            control = 0;
+        // if(console::key(console::K_LEFT) && control != 2)
+        //     control = 0;
     
-        else if(console::key(console::K_UP) && control != 3)
-            control = 1;
+        // else if(console::key(console::K_UP) && control != 3)
+        //     control = 1;
 
-        else if(console::key(console::K_RIGHT) && control != 0)
-            control = 2;
+        // else if(console::key(console::K_RIGHT) && control != 0)
+        //     control = 2;
 
-        else if(console::key(console::K_DOWN) && control != 1)
-            control = 3;
-        
+        // else if(console::key(console::K_DOWN) && control != 1)
+        //     control = 3;
+
+        handleInput(control, x, y);
        
-        if(control == 0)
-            x--;
+        // if(control == 0)
+        //     x--;
 
-        else if(control == 1)
-            y--;
+        // else if(control == 1)
+        //     y--;
 
-        else if(control == 2)
-            x++;
+        // else if(control == 2)
+        //     x++;
 
-        else if (control == 3)
-            y++;
+        // else if (control == 3)
+        //     y++;
         
         
  
@@ -123,18 +125,22 @@ void game()
 
 
 
-int handleInput()
-{
-    if(console::key(console::K_LEFT))
-        return  0;
+
+// int& handleInput(int &control)
+// {
+//     if(console::key(console::K_LEFT) && control != 2)
+//         control = 0;
     
-    else if(console::key(console::K_UP))
-        return  1;
+//     else if(console::key(console::K_UP) && control != 3)
+//         control = 1;
 
-    else if(console::key(console::K_RIGHT))
-        return  2;
+//     else if(console::key(console::K_RIGHT) && control != 0)
+//         control = 2;
 
-    else if(console::key(console::K_DOWN))
-        return  3;
-}
-
+//     else if(console::key(console::K_DOWN) && control != 1)
+//         control = 3;
+//     else
+//     {
+//         return control;
+//     }
+// }
