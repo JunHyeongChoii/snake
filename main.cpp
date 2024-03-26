@@ -24,8 +24,8 @@ int y = (BOARD_SIZE-1)/2;
 void game();
 void drawWall();
 void handleInput(int& control, int& x, int &y);
-
-
+void restrictInScreen(int & x, int& y, int boardSize);
+bool finishGameBad(int & x,int& y, int boardSize);
 int main()
 {
     
@@ -42,7 +42,10 @@ void game()
     console::init();
     double targetFrameDuration = 1.0/MOVE_DELAY;
     int score = 0;
-    
+    int appleX = 0;
+    int appleY = 0;
+
+    std::string playerSize = "";
     while(true)
     {
         std::clock_t frameStart = std::clock();
@@ -52,49 +55,31 @@ void game()
         std::string scorePrint = "Score: ";
         scorePrint.insert(scorePrint.size() , std::to_string(score));
         drawWall();
-        // console::draw(3,3,"Hello");
-       
-        // if(console::key(console::K_LEFT) && control != 2)
-        //     control = 0;
-    
-        // else if(console::key(console::K_UP) && control != 3)
-        //     control = 1;
-
-        // else if(console::key(console::K_RIGHT) && control != 0)
-        //     control = 2;
-
-        // else if(console::key(console::K_DOWN) && control != 1)
-        //     control = 3;
 
         handleInput(control, x, y);
        
-        // if(control == 0)
-        //     x--;
-
-        // else if(control == 1)
-        //     y--;
-
-        // else if(control == 2)
-        //     x++;
-
-        // else if (control == 3)
-        //     y++;
-        
-        
- 
+        restrictInScreen(x,y,BOARD_SIZE);
         console::draw(x,y ,SNAKE_STRING);
+        
+
+        finishGameBad(x,y, BOARD_SIZE);
+        
         console::draw(7, BOARD_SIZE ,scorePrint);
 
+        
         if (console::key(console::K_ESC))
         {
             break;
         }
+        int endGame = finishGameBad(x,y,BOARD_SIZE);
 
-        // while(a != (int)(((double)(frameStart)/CLOCKS_PER_SEC)/targetFrameDuration))
-        // {
-        //     console::wait();
-        // }
-        // a++;
+        if( endGame == 0)
+        {
+            console::draw(5, 10,"YOU LOSE!");
+            console::draw(1, 11,"Try again? (Enter)");
+            
+        }
+       
         while(true)
         {
             clock_t current = clock();
@@ -104,7 +89,6 @@ void game()
                 break;
             }
                 
-            
             else
             {
                 console::wait();
@@ -126,21 +110,28 @@ void game()
 
 
 
-// int& handleInput(int &control)
-// {
-//     if(console::key(console::K_LEFT) && control != 2)
-//         control = 0;
-    
-//     else if(console::key(console::K_UP) && control != 3)
-//         control = 1;
-
-//     else if(console::key(console::K_RIGHT) && control != 0)
-//         control = 2;
-
-//     else if(console::key(console::K_DOWN) && control != 1)
-//         control = 3;
-//     else
-//     {
-//         return control;
-//     }
+// void restrictInScreen(int& x, int& y) {
+//   // x, y 위치를 화면의 최대 크기에서 벗어나지 않게 한다.
+//   if (x < 0)
+//     x = 0;
+//   if (x >= console::SCREEN_WIDTH)
+//     x = console::SCREEN_WIDTH - 1;
+//   if (y < 0)
+//     y = 0;
+//   if (y >= console::SCREEN_HEIGHT)
+//     y = console::SCREEN_HEIGHT - 1;
 // }
+
+bool finishGameBad(int& x, int & y, int boardSize)
+{
+    if(x == 0 or x == boardSize-1)
+    {
+        return 0;
+    }
+    if(y == 0 or y == boardSize -1)
+    {
+        return 0;
+    }
+
+    return 1;
+}
