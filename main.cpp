@@ -41,10 +41,12 @@ void game()
     console::init();
     double targetFrameDuration = 1.0/MOVE_DELAY;
     int score = 0;
+    
     while(true)
     {
-        console::clear();
         std::clock_t frameStart = std::clock();
+        console::clear();
+        
 
         std::string scorePrint = "Score: ";
         scorePrint.insert(scorePrint.size() , std::to_string(score));
@@ -91,10 +93,22 @@ void game()
         //     console::wait();
         // }
         // a++;
-        while(clock() - frameStart < targetFrameDuration * CLOCKS_PER_SEC)
+        while(true)
         {
-            console::wait();
+            clock_t current = clock();
+            double dd = (double)(current - frameStart) / CLOCKS_PER_SEC;
+            if(targetFrameDuration <= dd)
+            {
+                break;
+            }
+                
+            
+            else
+            {
+                console::wait();
+            }
         }
+        
         
         // else
         // {
