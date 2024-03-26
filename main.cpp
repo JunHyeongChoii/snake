@@ -27,7 +27,7 @@ void drawWall();
 void handleInput(int& control, int& x, int &y);
 void restrictInScreen(int & x, int& y, int boardSize);
 bool finishGameBad(int & x,int& y, int boardSize);
-void randApplePosition(int& appleX, int& appleY, int tail,int tailX[], int tailY[],int bs);
+void randApplePosition(int& appleX, int& appleY, int tail,int tailX[], int tailY[] );
 bool selfCarsh(int x, int y, int tailX[], int tailY[], int tail);
 
 
@@ -58,9 +58,10 @@ void game()
     int scoreX = 7;
     int scoreLength = 8;
     int endGame = 1;
+    int endSCGame = 1;
     tailX[0] = x;
     tailY[0] = y;
-    randApplePosition(appleX, appleY, tail, tailX, tailY, BOARD_SIZE);
+    randApplePosition(appleX, appleY, tail, tailX, tailY);
 
     console::init();
     
@@ -77,7 +78,7 @@ void game()
         
         
         drawWall();
-        if(endGame == 1)
+        if(endGame == 1 && endSCGame && tail != (BOARD_SIZE-2) * (BOARD_SIZE-2) )
         {
             handleInput(control, x, y);
             if(tail >1)
@@ -134,13 +135,13 @@ void game()
 
 
         endGame = finishGameBad(x,y,BOARD_SIZE);
-        int endSCGame = selfCarsh(x, y, tailX, tailY, tail);
+        endSCGame = selfCarsh(x, y, tailX, tailY, tail);
 
         if((x == appleX) && (y == appleY))
         {
             tail++;
             score += 10;
-            randApplePosition(appleX, appleY, tail, tailX, tailY, BOARD_SIZE);
+            randApplePosition(appleX, appleY, tail, tailX, tailY);
         }
 
         if( endGame == 0 || endSCGame==0)
@@ -163,9 +164,10 @@ void game()
                 scoreX = 7;
                 control = 0;
                 score =0;
-                randApplePosition(appleX, appleY, tail, tailX, tailY,BOARD_SIZE);
+                randApplePosition(appleX, appleY, tail, tailX, tailY);
  
             }
+            
             
         }
         if(tail == (BOARD_SIZE-2) * (BOARD_SIZE-2))
@@ -188,7 +190,7 @@ void game()
                 scoreX = 7;
                 control = 0;
                 score =0;
-                randApplePosition(appleX, appleY, tail, tailX, tailY,BOARD_SIZE);
+                randApplePosition(appleX, appleY, tail, tailX, tailY);
  
             }
         }
